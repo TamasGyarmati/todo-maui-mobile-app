@@ -23,6 +23,7 @@ This is a small practice project – a simple **CRUD Todo app** built with .NET 
 ---
 
 ## ⚡ How to Use
-1. Clone the repo:  
-```bash
-git clone <repo-url>
+1. Open the project in Visual Studio (with MAUI support).  
+2. In the `Todo.csproj` file, make sure to set the correct target framework for iOS:  
+```xml
+<TargetFrameworks>net8.0-ios</TargetFrameworks>
