@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDo.AddTodoPage"
+             Title="Add new Todo">
+    
+    <Grid RowDefinitions="*, Auto">
+        <VerticalStackLayout Padding="10" Margin="10" Spacing="10">
+            <Entry Text="{Binding Draft.Title}" Placeholder="Title"/>
+            <Entry Text="{Binding Draft.Description}" Placeholder="Description"/>
+            <HorizontalStackLayout>
+                <Label Text="Pick a deadline date" FontSize="Large" FontAttributes="Bold"/>
+                <DatePicker Date="{Binding Draft.Deadline}" MinimumDate="{Binding Date}"/>
+            </HorizontalStackLayout>
+            <VerticalStackLayout>
+                <Button Text="Pick a photo" Command="{Binding PickPhotoCommand}"/>
+                <Image Source="{Binding Draft.ImageUrl}"/>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+        <HorizontalStackLayout Grid.Row="1" HorizontalOptions="Center">
+            <Button Text="Add" Command="{Binding AddNewCommand}" BackgroundColor="Brown"/>
+            <Button Text="Cancel" Command="{Binding CancelEditCommand}" BackgroundColor="Brown"/>
+        </HorizontalStackLayout>
+    </Grid>
+    
+</ContentPage>

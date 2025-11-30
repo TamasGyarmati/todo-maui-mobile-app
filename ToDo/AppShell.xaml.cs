@@ -7,5 +7,6 @@ public partial class AppShell : Shell
         InitializeComponent();
         
         Routing.RegisterRoute("editTodo", typeof(EditTodoPage));
+        Routing.RegisterRoute("addTodo", typeof(AddTodoPage));
     }
 }

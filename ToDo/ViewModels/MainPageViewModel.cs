@@ -8,6 +8,7 @@ using ToDo.Models;
 namespace ToDo.ViewModels;
 
 [QueryProperty(nameof(EditedTodo),"SentFromEditPage")]
+[QueryProperty(nameof(AddedTodo), "SentFromAddPage")]
 public partial class MainPageViewModel : ObservableObject
 {
     IDatabase<Todo> database;
@@ -18,6 +19,9 @@ public partial class MainPageViewModel : ObservableObject
     
     [ObservableProperty]
     Todo editedTodo;
+    
+    [ObservableProperty]
+    Todo addedTodo;
 
     public MainPageViewModel()
     {
@@ -44,10 +48,24 @@ public partial class MainPageViewModel : ObservableObject
                 SelectedTodo = null;
                 await database.UpdateTodoAsync(value);
             }
-            else
+            
+            Todos.Add(value);
+        }
+        else
+        {
+            WeakReferenceMessenger.Default.Send("Value doesn't exist");
+        }
+    }
+    
+    async partial void OnAddedTodoChanged(Todo value)
+    {
+        if (value != null)
+        {
+            if (SelectedTodo == null)
             {
                 await database.CreateTodoAsync(value);
             }
+            
             Todos.Add(value);
         }
         else
@@ -63,10 +81,10 @@ public partial class MainPageViewModel : ObservableObject
 
         var param = new ShellNavigationQueryParameters
         {
-            { "SentFromMainPage", new Todo() }
+            { "SentFromMainPageAdd", new Todo() }
         };
 
-        await Shell.Current.GoToAsync("editTodo", param);
+        await Shell.Current.GoToAsync("addTodo", param);
     }
     
     [RelayCommand]
