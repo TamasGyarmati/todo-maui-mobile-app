@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDo.MainPage"
+             xmlns:models="clr-namespace:ToDo.Models"
+             Title="Main Page">
+
+    <Grid RowDefinitions="*, Auto">
+        <Border StrokeShape="RoundRectangle10" Stroke="Brown">
+            <CollectionView ItemsSource="{Binding Todos}"
+                            SelectedItem="{Binding SelectedTodo}"
+                            SelectionMode="Single"
+                            BackgroundColor="Beige">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Todo">
+                            <Border StrokeShape="RoundRectangle10" Stroke="Brown">
+                                <VerticalStackLayout Padding="10" Margin="10" Spacing="10">
+                                        <Label Text="{Binding Title, StringFormat='Title: {0}'}" FontSize="Large" FontAttributes="Bold"/>
+                                        <Label Text="{Binding Description, StringFormat='Description: {0}'}" FontSize="Medium"/>
+                                        <Label Text="{Binding Created, StringFormat='Created at: {0}'}" FontSize="Medium"/>
+                                        <Label Text="{Binding Deadline, StringFormat='{0} days till deadline', Converter={StaticResource DeadlineConverter}}" FontSize="Medium"/>
+                                        <Image Source="{Binding ImageUrl}" Scale="0.5"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Border>
+            <HorizontalStackLayout Grid.Row="1" Padding="10" Margin="10" Spacing="10" HorizontalOptions="Center">
+                <Button Text="Add" BackgroundColor="Brown" Command="{Binding AddTodoCommand}"/>
+                <Button Text="Edit" BackgroundColor="Brown" Command="{Binding EditTodoCommand}"/>
+                <Button Text="Remove" BackgroundColor="Brown" Command="{Binding DeleteTodoCommand}"/>
+                <Button Text="Status" BackgroundColor="Brown" Command="{Binding ShareTodoCommand}"/>
+            </HorizontalStackLayout>
+    </Grid>
+
+</ContentPage>

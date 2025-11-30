@@ -1,0 +1,18 @@
+bin/
+obj/
+*.user
+*.db
+*.apk
+*.aab
+*.keystore
+*.pdb
+*.cache
+*.log
+
+# MAUI specific
+Platforms/Android/*.aab
+Platforms/Android/obj/
+Platforms/Android/bin/
+Platforms/iOS/obj/
+Platforms/iOS/bin/
+Resources/Raw/*.zip
